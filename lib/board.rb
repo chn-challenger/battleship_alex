@@ -6,23 +6,37 @@ def initialize
   @ships = []
 end
 
-  def place(ship, down_value, right_value, orientation)
-
-
-    ship.body.each do |body_part|
-      body_part[:position] = [down_value, right_value]
-      case orientation
-        when 'north' then down_value -= 1
-        when 'east' then right_value += 1
-        when 'south' then down_value += 1
-        when 'west' then right_value -= 1
+  def impending_coords(size, down_value, right_value, orientation)
+      result = []
+      size.times do
+        result << [down_value, right_value]
+        case orientation
+          when 'north' then down_value -= 1
+          when 'east' then right_value += 1
+          when 'south' then down_value += 1
+          when 'west' then right_value -= 1
+        end
       end
-    end
+      result
+  end
+
+  def place(ship, down_value, right_value, orientation)
+    coords_to_add = impending_coords(ship.size,down_value, right_value, orientation)
+    # outside??
+    # overlapping??
+    ship.write_ship_coords(coords_to_add)
     @ships << ship
+  end
+
+  def write_ship_coords(coords)
+
   end
 
 end
 
+
+# board = Board.new
+# p board.impending_coords(3,2,2,'east')
 
 
 
