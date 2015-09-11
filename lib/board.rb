@@ -7,6 +7,8 @@ def initialize
 end
 
   def place(ship, down_value, right_value, orientation)
+
+
     ship.body.each do |body_part|
       body_part[:position] = [down_value, right_value]
       case orientation
